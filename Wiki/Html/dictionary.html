@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bap Dictionary</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        :root {
+            --bg: #f6f7fb; --card: #ffffff; --text: #1f2430; --muted: #6b7280;
+            --accent: #5b5bd6; --accent-soft: #ececfb; --border: #e3e5ee; --stripe: #f9f9fd;
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg: #14151c; --card: #1d1f29; --text: #e8eaf2; --muted: #9aa0b4;
+                --accent: #9a9aff; --accent-soft: #2a2c44; --border: #2d3040; --stripe: #222434;
+            }
+        }
+        * { box-sizing: border-box; }
+        body {
+            margin: 0; padding: 24px 16px 64px; background: var(--bg); color: var(--text);
+            font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; line-height: 1.5;
+        }
+        .wrap { max-width: 760px; margin: 0 auto; }
+        h1 { margin: 0 0 4px; font-size: 2rem; }
+        .home { color: var(--accent); text-decoration: none; font-weight: 600; }
+        .home:hover { text-decoration: underline; }
+        .search {
+            position: sticky; top: 0; z-index: 5; padding: 14px 0; background: var(--bg);
+        }
+        .search input {
+            width: 100%; padding: 12px 16px; font-size: 1rem; border-radius: 12px;
+            border: 1px solid var(--border); background: var(--card); color: var(--text); outline: none;
+        }
+        .search input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-soft); }
+        section {
+            background: var(--card); border: 1px solid var(--border); border-radius: 14px;
+            padding: 8px 18px 14px; margin: 18px 0; overflow: hidden;
+        }
+        h2 { margin: 12px 0 8px; font-size: 1.2rem; color: var(--accent); }
+        h3 { margin: 16px 0 6px; font-size: 1rem; color: var(--muted); }
+        table { width: 100%; border-collapse: collapse; margin-bottom: 6px; }
+        th {
+            text-align: left; font-size: .75rem; text-transform: uppercase; letter-spacing: .06em;
+            color: var(--muted); padding: 8px 10px; border-bottom: 2px solid var(--border);
+        }
+        td { padding: 8px 10px; border-bottom: 1px solid var(--border); }
+        tbody tr:nth-child(even) { background: var(--stripe); }
+        tbody tr:last-child td { border-bottom: none; }
+        td.bap { font-weight: 700; color: var(--accent); width: 45%; word-break: break-word; }
+        .note { color: var(--muted); font-size: .9rem; margin: 8px 10px 0; }
+        .empty { display: none; text-align: center; color: var(--muted); padding: 32px 0; }
+    </style>
+</head>
+<body>
+  <div class="wrap">
+    <h1>Dictionary</h1>
+    <a class="home" href="index.html">&larr; Home</a>
+
+    <div class="search">
+        <input id="q" type="search" placeholder="Search Bap or English..." autocomplete="off">
+    </div>
+
+    <section>
+      <h2>Greetings and Responses</h2>
+      <table>
+        <thead><tr><th>Bap</th><th>English</th></tr></thead>
+        <tbody>
+          <tr><td class="bap">Qjer</td><td>Hello</td></tr>
+          <tr><td class="bap">Nsd</td><td>Bye</td></tr>
+          <tr><td class="bap">Ora</td><td>Goodbye</td></tr>
+          <tr><td class="bap">tup</td><td>Yes</td></tr>
+          <tr><td class="bap">ptu</td><td>No</td></tr>
+          <tr><td class="bap">zi</td><td>Thanks</td></tr>
+          <tr><td class="bap">pleat</td><td>Please</td></tr>
+          <tr><td class="bap">weklome</td><td>Welcome</td></tr>
+        </tbody>
+      </table>
+    </section>
+    <section>
+      <h2>Pronouns</h2>
+      <table>
+        <thead><tr><th>Bap</th><th>English</th></tr></thead>
+        <tbody>
+          <tr><td class="bap">ko</td><td>I / me</td></tr>
+          <tr><td class="bap">su</td><td>You</td></tr>
+          <tr><td class="bap">mi</td><td>We</td></tr>
+          <tr><td class="bap">Po</td><td>They</td></tr>
+          <tr><td class="bap">naj</td><td>Them</td></tr>
+          <tr><td class="bap">qw</td><td>He</td></tr>
+          <tr><td class="bap">wq</td><td>Her</td></tr>
+          <tr><td class="bap">it</td><td>It</td></tr>
+          <tr><td class="bap">fiop</td><td>This</td></tr>
+          <tr><td class="bap">thainten</td><td>That</td></tr>
+        </tbody>
+      </table>
+    </section>
+    <section>
+      <h2>Verbs</h2>
+      <table>
+        <thead><tr><th>Bap</th><th>English</th></tr></thead>
+        <tbody>
+          <tr><td class="bap">nak</td><td>Go</td></tr>
+          <tr><td class="bap">proakier</td><td>Program</td></tr>
+          <tr><td class="bap">xy</td><td>Am / Are</td></tr>
+          <tr><td class="bap">cx</td><td>Is</td></tr>
+          <tr><td class="bap">yu</td><td>Have</td></tr>
+          <tr><td class="bap">pu</td><td>Has</td></tr>
+          <tr><td class="bap">kan</td><td>Love</td></tr>
+          <tr><td class="bap">trop</td><td>Like</td></tr>
+          <tr><td class="bap">kop</td><td>Wish</td></tr>
+          <tr><td class="bap">tirep</td><td>Tired</td></tr>
+          <tr><td class="bap">tasful</td><td>Useful</td></tr>
+          <tr><td class="bap">ptutasful</td><td>Useless</td></tr>
+          <tr><td class="bap">hapon</td><td>Hungry</td></tr>
+          <tr><td class="bap">ponha</td><td>Thirsty</td></tr>
+          <tr><td class="bap">do</td><td>Do</td></tr>
+          <tr><td class="bap">Mak</td><td>Make</td></tr>
+          <tr><td class="bap">grt</td><td>Got</td></tr>
+          <tr><td class="bap">parsaf</td><td>Understand</td></tr>
+          <tr><td class="bap">eat</td><td>Eat</td></tr>
+          <tr><td class="bap">baltas</td><td>Drink</td></tr>
+          <tr><td class="bap">lalvt</td><td>Live</td></tr>
+          <tr><td class="bap">drei</td><td>Want</td></tr>
+          <tr><td class="bap">haterit</td><td>Hate</td></tr>
+          <tr><td class="bap">pudrehatrei</td><td>Dislike</td></tr>
+          <tr><td class="bap">knat</td><td>Know</td></tr>
+          <tr><td class="bap">ser</td><td>See</td></tr>
+          <tr><td class="bap">heapren</td><td>Hear</td></tr>
+          <tr><td class="bap">heapr</td><td>Listen</td></tr>
+          <tr><td class="bap">topline</td><td>Think</td></tr>
+          <tr><td class="bap">gplaen</td><td>Give</td></tr>
+          <tr><td class="bap">all</td><td>Add</td></tr>
+          <tr><td class="bap">malopr</td><td>Multiply</td></tr>
+          <tr><td class="bap">darpos</td><td>Divide</td></tr>
+          <tr><td class="bap">saip</td><td>Say</td></tr>
+          <tr><td class="bap">iopa</td><td>Count</td></tr>
+          <tr><td class="bap">flipentsag</td><td>Fly</td></tr>
+          <tr><td class="bap">krivenar</td><td>Drive</td></tr>
+          <tr><td class="bap">traviner</td><td>Travel</td></tr>
+          <tr><td class="bap">raitren</td><td>Rotate</td></tr>
+          <tr><td class="bap">liften</td><td>Leave</td></tr>
+          <tr><td class="bap">came</td><td>Come</td></tr>
+          <tr><td class="bap">stairp</td><td>Steer</td></tr>
+          <tr><td class="bap">walt</td><td>Work</td></tr>
+          <tr><td class="bap">mailtenzs</td><td>Move</td></tr>
+        </tbody>
+      </table>
+    </section>
+    <section>
+      <h2>Modal Verbs</h2>
+      <table>
+        <thead><tr><th>Bap</th><th>English</th></tr></thead>
+        <tbody>
+          <tr><td class="bap">kup</td><td>Will</td></tr>
+          <tr><td class="bap">zx</td><td>Should</td></tr>
+          <tr><td class="bap">shau</td><td>Should</td></tr>
+          <tr><td class="bap">cali</td><td>Can</td></tr>
+          <tr><td class="bap">opleti</td><td>Need</td></tr>
+        </tbody>
+      </table>
+    </section>
+    <section>
+      <h2>Question Words</h2>
+      <table>
+        <thead><tr><th>Bap</th><th>English</th></tr></thead>
+        <tbody>
+          <tr><td class="bap">hau</td><td>How</td></tr>
+          <tr><td class="bap">Wien</td><td>When</td></tr>
+          <tr><td class="bap">Waien</td><td>Why</td></tr>
+          <tr><td class="bap">Wai</td><td>Which</td></tr>
+          <tr><td class="bap">Wie</td><td>What</td></tr>
+          <tr><td class="bap">Ho</td><td>Who</td></tr>
+          <tr><td class="bap">waslten</td><td>Where</td></tr>
+          <tr><td class="bap">troe</td><td>True</td></tr>
+          <tr><td class="bap">froe</td><td>False</td></tr>
+        </tbody>
+      </table>
+    </section>
+    <section>
+      <h2>Adverbs</h2>
+      <table>
+        <thead><tr><th>Bap</th><th>English</th></tr></thead>
+        <tbody>
+          <tr><td class="bap">tic</td><td>Quickly</td></tr>
+          <tr><td class="bap">putic</td><td>Slowly</td></tr>
+          <tr><td class="bap">kalipem</td><td>Easily</td></tr>
+          <tr><td class="bap">ptukalp</td><td>Hardly</td></tr>
+          <tr><td class="bap">reali</td><td>Really</td></tr>
+          <tr><td class="bap">veari</td><td>Very</td></tr>
+          <tr><td class="bap">taighten</td><td>Together</td></tr>
+        </tbody>
+      </table>
+    </section>
+    <section>
+      <h2>Nouns</h2>
+      <table>
+        <thead><tr><th>Bap</th><th>English</th></tr></thead>
+        <tbody>
+          <tr><td class="bap">amka</td><td>Day</td></tr>
+          <tr><td class="bap">amkalap</td><td>Tomorrow</td></tr>
+          <tr><td class="bap">uport</td><td>School</td></tr>
+          <tr><td class="bap">namt</td><td>Name</td></tr>
+          <tr><td class="bap">suyrn</td><td>Age</td></tr>
+          <tr><td class="bap">problem</td><td>Problem</td></tr>
+          <tr><td class="bap">jalt</td><td>Time</td></tr>
+          <tr><td class="bap">iop</td><td>Key</td></tr>
+          <tr><td class="bap">fab</td><td>Door</td></tr>
+          <tr><td class="bap">kearpan</td><td>Person</td></tr>
+          <tr><td class="bap">balt</td><td>Boy</td></tr>
+          <tr><td class="bap">palt</td><td>Girl</td></tr>
+          <tr><td class="bap">bluder</td><td>Brother</td></tr>
+          <tr><td class="bap">paltruder</td><td>Sister</td></tr>
+          <tr><td class="bap">mom</td><td>Mom</td></tr>
+          <tr><td class="bap">pah</td><td>Dad</td></tr>
+          <tr><td class="bap">forkearpan</td><td>Family</td></tr>
+          <tr><td class="bap">waster</td><td>Water</td></tr>
+          <tr><td class="bap">inaserpefah</td><td>Internet</td></tr>
+          <tr><td class="bap">inasferpdah</td><td>Internet domain</td></tr>
+          <tr><td class="bap">daherncia</td><td>Domain</td></tr>
+          <tr><td class="bap">chair</td><td>Chair</td></tr>
+          <tr><td class="bap">kackir</td><td>Table</td></tr>
+          <tr><td class="bap">naipen</td><td>Number</td></tr>
+          <tr><td class="bap">cailer</td><td>Color</td></tr>
+          <tr><td class="bap">morgen</td><td>Morning</td></tr>
+          <tr><td class="bap">evantplensat</td><td>Evening</td></tr>
+          <tr><td class="bap">caitpek</td><td>City</td></tr>
+          <tr><td class="bap">blashiftencaitpek</td><td>Capital City</td></tr>
+          <tr><td class="bap">cantrie</td><td>Country</td></tr>
+          <tr><td class="bap">shifts</td><td>Pencil</td></tr>
+          <tr><td class="bap">shieintrg</td><td>Ink</td></tr>
+          <tr><td class="bap">shiftsintrg</td><td>Pen</td></tr>
+          <tr><td class="bap">cairo</td><td>Car</td></tr>
+          <tr><td class="bap">cairopen</td><td>Truck</td></tr>
+          <tr><td class="bap">kicle</td><td>Bicycle</td></tr>
+          <tr><td class="bap">scoter</td><td>Scooter</td></tr>
+          <tr><td class="bap">birkentop</td><td>Bird</td></tr>
+          <tr><td class="bap">flipentsagbirk</td><td>Airplane</td></tr>
+          <tr><td class="bap">balt</td><td>Boat</td></tr>
+          <tr><td class="bap">element</td><td>Element</td></tr>
+          <tr><td class="bap">bolk</td><td>Book</td></tr>
+          <tr><td class="bap">walt</td><td>Work</td></tr>
+          <tr><td class="bap">trap</td><td>Tree</td></tr>
+          <tr><td class="bap">flipentsagfab</td><td>Elevator</td></tr>
+          <tr><td class="bap">Mainten</td><td>Man</td></tr>
+          <tr><td class="bap">womainten</td><td>Woman</td></tr>
+        </tbody>
+      </table>
+    </section>
+    <section>
+      <h2>Directions</h2>
+      <table>
+        <thead><tr><th>Bap</th><th>English</th></tr></thead>
+        <tbody>
+          <tr><td class="bap">nast</td><td>North</td></tr>
+          <tr><td class="bap">touzt</td><td>South</td></tr>
+          <tr><td class="bap">est</td><td>East</td></tr>
+          <tr><td class="bap">west</td><td>West</td></tr>
+          <tr><td class="bap">uptaiden</td><td>Up</td></tr>
+          <tr><td class="bap">dairden</td><td>Down</td></tr>
+          <tr><td class="bap">laiften</td><td>Left</td></tr>
+          <tr><td class="bap">taighteker</td><td>Right</td></tr>
+          <tr><td class="bap">farkliral</td><td>Forward</td></tr>
+          <tr><td class="bap">nakfarkilar</td><td>Backward</td></tr>
+          <tr><td class="bap">fahrad</td><td>Far</td></tr>
+          <tr><td class="bap">nahrad</td><td>Near</td></tr>
+          <tr><td class="bap">saiden</td><td>Upside</td></tr>
+        </tbody>
+      </table>
+    </section>
+    <section>
+      <h2>Prepositions</h2>
+      <table>
+        <thead><tr><th>Bap</th><th>English</th></tr></thead>
+        <tbody>
+          <tr><td class="bap">bi</td><td>In</td></tr>
+          <tr><td class="bap">lap</td><td>After</td></tr>
+          <tr><td class="bap">keaflap</td><td>Before</td></tr>
+          <tr><td class="bap">for</td><td>For</td></tr>
+          <tr><td class="bap">than</td><td>Than</td></tr>
+          <tr><td class="bap">plus</td><td>Plus</td></tr>
+          <tr><td class="bap">mal</td><td>Minus</td></tr>
+          <tr><td class="bap">taj</td><td>To</td></tr>
+          <tr><td class="bap">tehanical</td><td>Through</td></tr>
+          <tr><td class="bap">fraim</td><td>From</td></tr>
+        </tbody>
+      </table>
+    </section>
+    <section>
+      <h2>Conjunctions</h2>
+      <table>
+        <thead><tr><th>Bap</th><th>English</th></tr></thead>
+        <tbody>
+          <tr><td class="bap">sp</td><td>And</td></tr>
+          <tr><td class="bap">ps</td><td>Or (short for psoak)</td></tr>
+          <tr><td class="bap">psoak</td><td>Or</td></tr>
+          <tr><td class="bap">so</td><td>So</td></tr>
+          <tr><td class="bap">sai</td><td>So</td></tr>
+          <tr><td class="bap">brei</td><td>But</td></tr>
+          <tr><td class="bap">if</td><td>If</td></tr>
+          <tr><td class="bap">del</td><td>Else</td></tr>
+          <tr><td class="bap">dan</td><td>Then</td></tr>
+        </tbody>
+      </table>
+    </section>
+    <section>
+      <h2>Adjectives</h2>
+      <table>
+        <thead><tr><th>Bap</th><th>English</th></tr></thead>
+        <tbody>
+          <tr><td class="bap">taop</td><td>Smart</td></tr>
+          <tr><td class="bap">poat</td><td>Dumb</td></tr>
+          <tr><td class="bap">daf</td><td>Okay</td></tr>
+          <tr><td class="bap">malt</td><td>More</td></tr>
+          <tr><td class="bap">hem</td><td>Less</td></tr>
+          <tr><td class="bap">sorry</td><td>Sorry</td></tr>
+          <tr><td class="bap">talp</td><td>Kind</td></tr>
+          <tr><td class="bap">ulp</td><td>Ugly</td></tr>
+          <tr><td class="bap">ptulp</td><td>Beautiful</td></tr>
+          <tr><td class="bap">kali</td><td>Easy</td></tr>
+          <tr><td class="bap">ptukalie</td><td>Hard</td></tr>
+          <tr><td class="bap">halp</td><td>Happy</td></tr>
+          <tr><td class="bap">pauthalt</td><td>Sad</td></tr>
+          <tr><td class="bap">gut</td><td>Good</td></tr>
+          <tr><td class="bap">tug</td><td>Bad</td></tr>
+          <tr><td class="bap">blashiften</td><td>Big</td></tr>
+          <tr><td class="bap">smaliften</td><td>Small</td></tr>
+          <tr><td class="bap">hot</td><td>Hot</td></tr>
+          <tr><td class="bap">caul</td><td>Cold</td></tr>
+        </tbody>
+      </table>
+    </section>
+    <section>
+      <h2>Sentence Modifiers</h2>
+      <table>
+        <thead><tr><th>Bap</th><th>English</th></tr></thead>
+        <tbody>
+          <tr><td class="bap">guqi</td><td>Maybe</td></tr>
+          <tr><td class="bap">ptu</td><td>Not / No</td></tr>
+        </tbody>
+      </table>
+    </section>
+    <section>
+      <h2>Tense Markers</h2>
+      <table>
+        <thead><tr><th>Bap</th><th>English</th></tr></thead>
+        <tbody>
+          <tr><td class="bap">sa</td><td>Future (suffix)</td></tr>
+          <tr><td class="bap">af</td><td>Past (suffix)</td></tr>
+        </tbody>
+      </table>
+    </section>
+    <section>
+      <h2>Determiners</h2>
+      <table>
+        <thead><tr><th>Bap</th><th>English</th></tr></thead>
+        <tbody>
+          <tr><td class="bap">kol</td><td>Some</td></tr>
+          <tr><td class="bap">deth</td><td>The</td></tr>
+          <tr><td class="bap">ain</td><td>All</td></tr>
+        </tbody>
+      </table>
+    </section>
+    <section>
+      <h2>Numbers</h2>
+      <h3>Basic Numbers (0-9)</h3>
+      <table>
+        <thead><tr><th>Bap</th><th>English</th></tr></thead>
+        <tbody>
+          <tr><td class="bap">null</td><td>Zero</td></tr>
+          <tr><td class="bap">ein</td><td>One</td></tr>
+          <tr><td class="bap">twi</td><td>Two</td></tr>
+          <tr><td class="bap">threi</td><td>Three</td></tr>
+          <tr><td class="bap">four</td><td>Four</td></tr>
+          <tr><td class="bap">five</td><td>Five</td></tr>
+          <tr><td class="bap">secht</td><td>Six</td></tr>
+          <tr><td class="bap">sevenht</td><td>Seven</td></tr>
+          <tr><td class="bap">einenht</td><td>Eight</td></tr>
+          <tr><td class="bap">noe</td><td>Nine</td></tr>
+        </tbody>
+      </table>
+      <h3>Larger Numbers</h3>
+      <table>
+        <thead><tr><th>Bap</th><th>English</th></tr></thead>
+        <tbody>
+          <tr><td class="bap">tien</td><td>Ten</td></tr>
+          <tr><td class="bap">hantirden</td><td>Hundred</td></tr>
+          <tr><td class="bap">thaiseond</td><td>Thousand</td></tr>
+        </tbody>
+      </table>
+      <h3>Examples of composing larger numbers</h3>
+      <table>
+        <thead><tr><th>Bap</th><th>English</th></tr></thead>
+        <tbody>
+          <tr><td class="bap">tien</td><td>10</td></tr>
+          <tr><td class="bap">twitien</td><td>20</td></tr>
+          <tr><td class="bap">threi-tien-four</td><td>34</td></tr>
+          <tr><td class="bap">ein-hantirden</td><td>100</td></tr>
+          <tr><td class="bap">twi-hantirden-twitien-ein</td><td>221</td></tr>
+          <tr><td class="bap">ein-thaiseond</td><td>1000</td></tr>
+        </tbody>
+      </table>
+      <p class="note">Note: eintien is invalid; use just tien for 10.</p>
+    </section>
+    <section>
+      <h2>Time and Location</h2>
+      <table>
+        <thead><tr><th>Bap</th><th>English</th></tr></thead>
+        <tbody>
+          <tr><td class="bap">nai</td><td>Now</td></tr>
+          <tr><td class="bap">plao</td><td>Night</td></tr>
+          <tr><td class="bap">ap</td><td>At</td></tr>
+        </tbody>
+      </table>
+    </section>
+    <section>
+      <h2>Colors</h2>
+      <table>
+        <thead><tr><th>Bap</th><th>English</th></tr></thead>
+        <tbody>
+          <tr><td class="bap">reizs</td><td>Red</td></tr>
+          <tr><td class="bap">blau</td><td>Blue</td></tr>
+          <tr><td class="bap">pafstal</td><td>Orange</td></tr>
+          <tr><td class="bap">grenizsch</td><td>Green</td></tr>
+          <tr><td class="bap">reipasfal</td><td>Yellow</td></tr>
+          <tr><td class="bap">black</td><td>Black</td></tr>
+          <tr><td class="bap">seiuz</td><td>White</td></tr>
+          <tr><td class="bap">greinzsen</td><td>Gray</td></tr>
+          <tr><td class="bap">pink</td><td>Pink</td></tr>
+          <tr><td class="bap">paur</td><td>Purple</td></tr>
+        </tbody>
+      </table>
+    </section>
+    <section>
+      <h2>Color Modifiers</h2>
+      <table>
+        <thead><tr><th>Bap</th><th>English</th></tr></thead>
+        <tbody>
+          <tr><td class="bap">lainzs</td><td>Light</td></tr>
+          <tr><td class="bap">blainzs</td><td>Dark</td></tr>
+        </tbody>
+      </table>
+      <p class="note">Examples: lainzs grenizsch = light green, blainzs reipasfal = dark yellow</p>
+    </section>
+    <section>
+      <h2>School Subjects</h2>
+      <table>
+        <thead><tr><th>Bap</th><th>English</th></tr></thead>
+        <tbody>
+          <tr><td class="bap">Mithensmathe</td><td>Math</td></tr>
+          <tr><td class="bap">Lanzshift</td><td>Language</td></tr>
+          <tr><td class="bap">Heisteiften</td><td>History</td></tr>
+          <tr><td class="bap">Geingstifen</td><td>Geography</td></tr>
+          <tr><td class="bap">Fizinsken</td><td>Physics</td></tr>
+          <tr><td class="bap">Scanuknce</td><td>Science</td></tr>
+          <tr><td class="bap">Haminstersty</td><td>Chemistry</td></tr>
+        </tbody>
+      </table>
+    </section>
+    <section>
+      <h2>Miscellaneous</h2>
+      <table>
+        <thead><tr><th>Bap</th><th>English</th></tr></thead>
+        <tbody>
+          <tr><td class="bap">raistop</td><td>Reason</td></tr>
+          <tr><td class="bap">bajten</td><td>Because</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <p class="empty" id="empty">No words found.</p>
+  </div>
+
+  <script>
+    const q = document.getElementById('q');
+    const empty = document.getElementById('empty');
+    q.addEventListener('input', () => {
+      const term = q.value.trim().toLowerCase();
+      let anyShown = false;
+      document.querySelectorAll('section').forEach(sec => {
+        let shown = 0;
+        sec.querySelectorAll('tbody tr').forEach(row => {
+          const match = !term || row.textContent.toLowerCase().includes(term);
+          row.style.display = match ? '' : 'none';
+          if (match) shown++;
+        });
+        sec.querySelectorAll('.note').forEach(n => n.style.display = term ? 'none' : '');
+        sec.querySelectorAll('h3, table').forEach(el => {
+          if (el.tagName === 'TABLE') el.style.display = el.querySelectorAll('tbody tr:not([style*="none"])').length ? '' : 'none';
+        });
+        sec.style.display = shown || !term ? '' : 'none';
+        if (shown || !term) anyShown = true;
+      });
+      empty.style.display = anyShown ? 'none' : 'block';
+    });
+  </script>
+</body>
+</html>

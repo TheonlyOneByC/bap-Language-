@@ -1,0 +1,14 @@
+body {
+  color: white;
+  background-color: black;
+  font-family: sans-sheriff, arial;
+  overflow-wrap: anywhere;
+}
+
+body {
+    font-family: Arial, sans-serif;
+}
+
+pre, code, .code {
+    font-family: monospace;
+}
