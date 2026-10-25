@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bap Grammar</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        :root {
+            --bg: #f6f7fb; --card: #ffffff; --text: #1f2430; --muted: #6b7280;
+            --accent: #5b5bd6; --accent-soft: #ececfb; --border: #e3e5ee; --stripe: #f9f9fd;
+            --bad: #d14343; --bad-soft: #fdeeee;
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg: #14151c; --card: #1d1f29; --text: #e8eaf2; --muted: #9aa0b4;
+                --accent: #9a9aff; --accent-soft: #2a2c44; --border: #2d3040; --stripe: #222434;
+                --bad: #ff7b7b; --bad-soft: #3a2328;
+            }
+        }
+        * { box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            margin: 0; padding: 24px 16px 64px; background: var(--bg); color: var(--text);
+            font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; line-height: 1.55;
+        }
+        .wrap { max-width: 760px; margin: 0 auto; }
+        h1 { margin: 0 0 4px; font-size: 2rem; }
+        .links a { color: var(--accent); text-decoration: none; font-weight: 600; margin-right: 14px; }
+        .links a:hover { text-decoration: underline; }
+        .search { position: sticky; top: 0; z-index: 5; padding: 14px 0; background: var(--bg); }
+        .search input {
+            width: 100%; padding: 12px 16px; font-size: 1rem; border-radius: 12px;
+            border: 1px solid var(--border); background: var(--card); color: var(--text); outline: none;
+        }
+        .search input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-soft); }
+        .toc {
+            display: flex; flex-wrap: wrap; gap: 8px; margin: 4px 0 8px;
+        }
+        .toc a {
+            display: inline-flex; align-items: center; gap: 6px; padding: 6px 12px; font-size: .85rem;
+            background: var(--card); border: 1px solid var(--border); border-radius: 999px;
+            color: var(--text); text-decoration: none;
+        }
+        .toc a:hover { border-color: var(--accent); }
+        .toc a span { color: var(--accent); font-weight: 700; }
+        section {
+            background: var(--card); border: 1px solid var(--border); border-radius: 14px;
+            padding: 8px 18px 16px; margin: 18px 0; scroll-margin-top: 80px;
+        }
+        h2 { display: flex; align-items: center; gap: 10px; margin: 12px 0 8px; font-size: 1.2rem; color: var(--accent); }
+        .num {
+            display: inline-grid; place-items: center; min-width: 28px; height: 28px; padding: 0 6px;
+            border-radius: 8px; background: var(--accent-soft); font-size: .85rem;
+        }
+        p { margin: 8px 0; }
+        ul { margin: 8px 0; padding-left: 22px; }
+        code {
+            background: var(--accent-soft); color: var(--accent); padding: 1px 6px; border-radius: 6px;
+            font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: .9em;
+        }
+        .ex { margin: 12px 0 4px; border: 1px solid var(--border); border-radius: 10px; overflow: hidden; }
+        .ex .label {
+            padding: 6px 12px; font-size: .72rem; text-transform: uppercase; letter-spacing: .06em;
+            color: var(--muted); background: var(--stripe); border-bottom: 1px solid var(--border);
+        }
+        .ex .row { display: flex; flex-wrap: wrap; gap: 4px 16px; padding: 8px 12px; border-bottom: 1px solid var(--border); }
+        .ex .row:last-child { border-bottom: none; }
+        .ex .row:nth-child(even) { background: var(--stripe); }
+        .ex .bap { font-weight: 700; color: var(--accent); flex: 1 1 45%; word-break: break-word; }
+        .ex .en { flex: 1 1 45%; }
+        .ex.bad { border-color: var(--bad); }
+        .ex.bad .label { background: var(--bad-soft); color: var(--bad); border-color: var(--bad); }
+        .ex.bad .bap { color: var(--bad); }
+        .empty { display: none; text-align: center; color: var(--muted); padding: 32px 0; }
+    </style>
+</head>
+<body>
+  <div class="wrap">
+    <h1>Grammar</h1>
+    <div class="links"><a href="index.html">&larr; Home</a><a href="dictionary.html">Dictionary</a></div>
+
+    <div class="search">
+        <input id="q" type="search" placeholder="Search rules and examples..." autocomplete="off">
+    </div>
+
+    <nav class="toc">
+      <a href="#rule-1"><span>1</span>Noun Stacking</a>
+      <a href="#rule-2"><span>2</span>Direct Address</a>
+      <a href="#rule-3"><span>3</span>Default Word Order</a>
+      <a href="#rule-4"><span>4</span>Present Progressive</a>
+      <a href="#rule-5"><span>5</span>Prepositions</a>
+      <a href="#rule-6"><span>6</span>Modal Verbs</a>
+      <a href="#rule-7"><span>7</span>Combining Future Tense and Present Progressive</a>
+      <a href="#rule-8"><span>8</span>Negation</a>
+      <a href="#rule-9"><span>9</span>Verb Stacking</a>
+      <a href="#rule-10"><span>10</span>Sentence Modifiers</a>
+      <a href="#rule-11"><span>11</span>Future and Past Tense</a>
+      <a href="#rule-12"><span>12</span>Temporal Expressions</a>
+      <a href="#rule-13"><span>13</span>Numbers in Sentences</a>
+      <a href="#rule-14"><span>14</span>Pluralization</a>
+      <a href="#rule-15"><span>15</span>Questions</a>
+      <a href="#rule-16"><span>16</span>Verb Conjugation</a>
+      <a href="#rule-17"><span>17</span>Comparatives</a>
+      <a href="#rule-18"><span>18</span>Conditional Statements</a>
+      <a href="#rule-19"><span>19</span>Definite Articles</a>
+      <a href="#rule-20"><span>20</span>Adverbs</a>
+      <a href="#rule-21"><span>21</span>Colors and Color Modifiers</a>
+      <a href="#rule-22"><span>22</span>Composing Larger Numbers</a>
+      <a href="#rule-23"><span>23</span>Adverbs and Noun stacking</a>
+        
+    <section id="rule-1" data-search="noun stacking">
+      <h2><span class="num">1</span>Noun Stacking</h2>
+      <p>Nouns can be combined into longer nouns, similar to German.</p>
+      <div class="ex"><div class="label">Examples</div>
+        <div class="row"><span class="bap">iopfab</span><span class="en">key door</span></div>
+      </div>
+    </section>
+
+    <section id="rule-2" data-search="direct address">
+      <h2><span class="num">2</span>Direct Address</h2>
+      <p>When directly addressing someone, add <code>oa</code> to the word. If the word ends in <code>oa</code>, remove that ending.</p>
+      <div class="ex"><div class="label">Examples</div>
+        <div class="row"><span class="bap">su → suoa</span></div>
+      </div>
+    </section>
+
+    <section id="rule-3" data-search="default word order">
+      <h2><span class="num">3</span>Default Word Order</h2>
+      <p>The default order is: <strong>Subject → Verb → Object → Preposition</strong></p>
+      <p>The subject comes first, followed by the verb. Objects and other nouns follow the verb. Prepositions come after the subject or as needed.</p>
+      <div class="ex"><div class="label">Examples</div>
+        <div class="row"><span class="bap">Ko proakier bi Zig</span><span class="en">I program in Zig. (Subject → Verb → Preposition → Language)</span></div>
+        <div class="row"><span class="bap">Ko makaf Python proakier</span><span class="en">I made a Python program. (Subject → Verb → Object → Noun)</span></div>
+        <div class="row"><span class="bap">Ko nak uport</span><span class="en">I go to school. (Subject → Verb → Object)</span></div>
+      </div>
+    </section>
+
+    <section id="rule-4" data-search="present progressive">
+      <h2><span class="num">4</span>Present Progressive</h2>
+      <p>Add <code>ti</code> as a suffix to a verb to indicate that an action is currently in progress. This is similar to the English <code>-ing</code> ending.</p>
+      <p>When a verb is stacked with another verb, the <code>ti</code> suffix goes at the very end of the entire construction.</p>
+      <div class="ex"><div class="label">Examples</div>
+        <div class="row"><span class="bap">proakier</span><span class="en">program</span></div>
+        <div class="row"><span class="bap">proakierti</span><span class="en">programming</span></div>
+        <div class="row"><span class="bap">Ko xy proakierti</span><span class="en">I am programming.</span></div>
+        <div class="row"><span class="bap">Ko nakproakierti</span><span class="en">I am going programming. (stacked verb with progressive at end)</span></div>
+      </div>
+    </section>
+
+    <section id="rule-5" data-search="prepositions">
+      <h2><span class="num">5</span>Prepositions</h2>
+      <p>Prepositions go after the subject.</p>
+      <div class="ex"><div class="label">Examples</div>
+        <div class="row"><span class="bap">Ko proakier bi Zig</span><span class="en">I program in Zig.</span></div>
+      </div>
+    </section>
+
+    <section id="rule-6" data-search="modal verbs">
+      <h2><span class="num">6</span>Modal Verbs</h2>
+      <p>Modal verbs such as <code>kup</code> (will) and <code>zx</code> (should) go before the verb.</p>
+      <div class="ex"><div class="label">Examples</div>
+        <div class="row"><span class="bap">Ko kup nak uport</span><span class="en">I will go to school.</span></div>
+        <div class="row"><span class="bap">Ko zx nak uport</span><span class="en">I should go to school.</span></div>
+        <div class="row"><span class="bap">Ko kup proakier</span><span class="en">I will program.</span></div>
+      </div>
+    </section>
+
+    <section id="rule-7" data-search="combining future tense and present progressive">
+      <h2><span class="num">7</span>Combining Future Tense and Present Progressive</h2>
+      <p>The <code>ti</code> suffix remains attached to the verb when modal verbs are used.</p>
+      <div class="ex"><div class="label">Examples</div>
+        <div class="row"><span class="bap">Ko kup proakierti</span><span class="en">I will be programming.</span></div>
+      </div>
+    </section>
+
+    <section id="rule-8" data-search="negation">
+      <h2><span class="num">8</span>Negation</h2>
+      <p>The negation word <code>ptu</code> goes before the subject to negate a sentence.</p>
+      <div class="ex"><div class="label">Examples</div>
+        <div class="row"><span class="bap">Ko nak uport</span><span class="en">I go to school.</span></div>
+        <div class="row"><span class="bap">ptu ko nak uport</span><span class="en">I do not go to school.</span></div>
+        <div class="row"><span class="bap">ptu ko kup nak uport</span><span class="en">I will not go to school.</span></div>
+      </div>
+    </section>
+
+    <section id="rule-9" data-search="verb stacking">
+      <h2><span class="num">9</span>Verb Stacking</h2>
+      <p>Verbs can attach to other verbs, but a verb can have a maximum of one attached verb. That means you can combine two verbs into one construction, but not stack three verbs together.</p>
+      <p>The attached verb goes after the main verb. The attached verb can describe what the main verb is leading into.</p>
+      <div class="ex"><div class="label">Examples</div>
+        <div class="row"><span class="bap">nakproakier</span><span class="en">go programming</span></div>
+      </div>
+    </section>
+
+    <section id="rule-10" data-search="sentence modifiers">
+      <h2><span class="num">10</span>Sentence Modifiers</h2>
+      <p>Words that modify the truth or certainty of an entire sentence go before the subject.</p>
+      <div class="ex"><div class="label">Examples</div>
+        <div class="row"><span class="bap">ptu ko nak uport</span><span class="en">I do not go to school.</span></div>
+        <div class="row"><span class="bap">guqi ko proakier bi C++</span><span class="en">Maybe I program in C++.</span></div>
+      </div>
+    </section>
+
+    <section id="rule-11" data-search="future and past tense">
+      <h2><span class="num">11</span>Future and Past Tense</h2>
+      <p>There are many ways to say something in the future or past tense. The primary 3 ways are:</p>
+      <ul><li>Suffix <code>sa</code> → for future tense</li><li>Suffix <code>af</code> → for past tense</li><li>Using a word for future/past tense like <code>pu</code></li></ul>
+      <p><strong>Note:</strong> Past tense (<code>af</code>) cannot be combined with progressive (<code>ti</code>). You must choose one or the other.</p>
+      <div class="ex"><div class="label">Examples</div>
+        <div class="row"><span class="bap">Ko proakiersa</span><span class="en">I will program.</span></div>
+        <div class="row"><span class="bap">Ko proakieraf</span><span class="en">I programmed.</span></div>
+        <div class="row"><span class="bap">Ko pu proakier</span><span class="en">I have programmed.</span></div>
+        <div class="row"><span class="bap">Ko proakierti</span><span class="en">I am programming (present progressive, not past).</span></div>
+      </div>
+    </section>
+
+    <section id="rule-12" data-search="temporal expressions">
+      <h2><span class="num">12</span>Temporal Expressions</h2>
+      <p>Time expressions go after the verb.</p>
+      <div class="ex"><div class="label">Examples</div>
+        <div class="row"><span class="bap">Ko nak uport amka</span><span class="en">I go to school during the day.</span></div>
+        <div class="row"><span class="bap">Ko nak uport amkalap</span><span class="en">I go to school tomorrow.</span></div>
+      </div>
+    </section>
+
+    <section id="rule-13" data-search="numbers in sentences">
+      <h2><span class="num">13</span>Numbers in Sentences</h2>
+      <p>Numbers can be expressed using either numerals or words. When using words, follow the number vocabulary.</p>
+      <p>When a specific number is used, the noun stays in singular form. Combining a number with a plural noun is invalid grammar.</p>
+      <p>To create tens, add numbers together using the conjunction <code>sp</code> (and) or hyphen <code>-</code>. For example: <code>ein-sp-null</code> or <code>einnull</code> = 10. The hyphen is optional but helps with clarity.</p>
+      <div class="ex"><div class="label">Correct examples</div>
+        <div class="row"><span class="bap">Ko yu ein Pizza</span><span class="en">I have one pizza.</span></div>
+        <div class="row"><span class="bap">Ko yu null Pizza</span><span class="en">I have zero pizza.</span></div>
+        <div class="row"><span class="bap">Ko yu twi Pizza</span><span class="en">I have two pizzas.</span></div>
+        <div class="row"><span class="bap">Ko yu ein-sp-null Pizza</span><span class="en">I have ten pizzas.</span></div>
+      </div>
+      <div class="ex bad"><div class="label">Incorrect</div>
+        <div class="row"><span class="bap">❌ Ko yu twi Pizzas</span><span class="en">number + plural is invalid</span></div>
+      </div>
+    </section>
+
+    <section id="rule-14" data-search="pluralization">
+      <h2><span class="num">14</span>Pluralization</h2>
+      <p>To make a word plural, add the suffix <code>s</code> to the end of the word.</p>
+      <div class="ex"><div class="label">Standard pluralization</div>
+        <div class="row"><span class="bap">uport → uports</span><span class="en">school → schools</span></div>
+        <div class="row"><span class="bap">proakier → proakiers</span><span class="en">program → programs</span></div>
+        <div class="row"><span class="bap">kearpan → kearpans</span><span class="en">person → persons</span></div>
+      </div>
+      <p><strong>Exception:</strong> If a word ends in <code>s</code>, drop the final <code>s</code> and add <code>es</code> instead.</p>
+      <p>The suffix is added directly to the word without changing its original form otherwise.</p>
+    </section>
+
+    <section id="rule-15" data-search="questions">
+      <h2><span class="num">15</span>Questions</h2>
+      <p>Put <code>qa</code> at the end of a sentence to turn it into a question.</p>
+      <p>When using question words like <code>Wien</code>, <code>Wie</code>, <code>Ho</code>, <code>hau</code>, <code>Wai</code>, <code>Waien</code>, do NOT use <code>qa</code>. The question word itself marks it as a question.</p>
+      <div class="ex"><div class="label">Examples</div>
+        <div class="row"><span class="bap">ptu ko yu uport amkalap.</span><span class="en">I don't have school tomorrow.</span></div>
+        <div class="row"><span class="bap">ptu ko yu uport amkalap qa?</span><span class="en">Don't I have school tomorrow?</span></div>
+        <div class="row"><span class="bap">Ko Wien nak uport</span><span class="en">When do I go to school? (question word, no qa needed)</span></div>
+        <div class="row"><span class="bap">Ko hau proakier</span><span class="en">How do I program? (no qa needed with question word)</span></div>
+      </div>
+    </section>
+
+    <section id="rule-16" data-search="verb conjugation">
+      <h2><span class="num">16</span>Verb Conjugation</h2>
+      <p>Verbs change based on the subject's person:</p>
+      <p><strong>1st person singular (<code>ko</code>)</strong> = base verb form (no suffix)</p>
+      <p><strong>All other subjects</strong> (<code>su</code>, <code>mi</code>, <code>Po</code>, <code>qw</code>, <code>wq</code>, <code>it</code>, etc.) = add <code>im</code> suffix</p>
+      <p>This marks when the action is not performed by a single person or represents multiple people/things.</p>
+      <div class="ex"><div class="label">Examples</div>
+        <div class="row"><span class="bap">Ko proakier</span><span class="en">I program (singular)</span></div>
+        <div class="row"><span class="bap">Su proakierim</span><span class="en">You program (2nd person)</span></div>
+        <div class="row"><span class="bap">Mi proakierim</span><span class="en">We program (1st person plural)</span></div>
+        <div class="row"><span class="bap">Po proakierim</span><span class="en">They program (3rd person)</span></div>
+        <div class="row"><span class="bap">Ko kan</span><span class="en">I love (singular)</span></div>
+        <div class="row"><span class="bap">Su kanim</span><span class="en">You love (non-1st-person-singular)</span></div>
+      </div>
+    </section>
+
+    <section id="rule-17" data-search="comparatives">
+      <h2><span class="num">17</span>Comparatives</h2>
+      <p>To compare two things, use the structure: <strong>[Subject] + <code>xy</code> + [Adjective] + <code>than</code> + [comparison]</strong></p>
+      <p>The verb <code>xy</code> (am/are) connects the subject to the adjective being compared.</p>
+      <div class="ex"><div class="label">Examples</div>
+        <div class="row"><span class="bap">Ko xy taop than su</span><span class="en">I am smart than you (I am smarter than you)</span></div>
+        <div class="row"><span class="bap">deth uport xyim tasful than deth problem</span><span class="en">The school is useful than the problem</span></div>
+        <div class="row"><span class="bap">Mi xyim poat than Po xyim taop</span><span class="en">We are dumb than they are smart</span></div>
+      </div>
+    </section>
+
+    <section id="rule-18" data-search="conditional statements">
+      <h2><span class="num">18</span>Conditional Statements</h2>
+      <p>Conditional statements use the structure: <strong><code>if</code> [condition] <code>del</code> [statement]</strong></p>
+      <p>This expresses "if [something], else [something else]."</p>
+      <div class="ex"><div class="label">Examples</div>
+        <div class="row"><span class="bap">if Ko xy taop del Ko xy poat</span><span class="en">If I am smart, else I am dumb</span></div>
+        <div class="row"><span class="bap">if Su proakierim del Mi paltruder haponim</span><span class="en">If you program, else my sister is hungry</span></div>
+        <div class="row"><span class="bap">if Su grtim pizza del Ko yu null</span><span class="en">If you got pizza, else I have zero</span></div>
+      </div>
+    </section>
+
+    <section id="rule-19" data-search="definite articles">
+      <h2><span class="num">19</span>Definite Articles</h2>
+      <p>Use <code>deth</code> (the) before a noun to specify a particular person, place, or thing.</p>
+      <div class="ex"><div class="label">Examples</div>
+        <div class="row"><span class="bap">deth kearpan</span><span class="en">the person</span></div>
+        <div class="row"><span class="bap">deth uport</span><span class="en">the school</span></div>
+        <div class="row"><span class="bap">Ko nak deth uport</span><span class="en">I go to the school</span></div>
+        <div class="row"><span class="bap">deth mom pah</span><span class="en">the mom dad (the parents)</span></div>
+      </div>
+    </section>
+
+    <section id="rule-20" data-search="adverbs">
+      <h2><span class="num">20</span>Adverbs</h2>
+      <p>Adverbs modify verbs and describe how an action is performed. They go after the verb.</p>
+      <div class="ex"><div class="label">Examples</div>
+        <div class="row"><span class="bap">Ko proakier tic</span><span class="en">I program quickly</span></div>
+        <div class="row"><span class="bap">Su baltasim putic</span><span class="en">You drink slowly</span></div>
+        <div class="row"><span class="bap">Mi parsafim kalipem</span><span class="en">We understand easily</span></div>
+        <div class="row"><span class="bap">Ko nak ptukalp</span><span class="en">I go hardly (with difficulty)</span></div>
+      </div>
+    </section>
+
+    <section id="rule-21" data-search="colors and color modifiers">
+      <h2><span class="num">21</span>Colors and Color Modifiers</h2>
+      <p>Colors are adjectives that describe nouns. Color modifiers (like <code>lainzs</code> for light and <code>blainzs</code> for dark) go before the color word.</p>
+      <p>Colors follow standard adjective placement rules (before the noun).</p>
+      <div class="ex"><div class="label">Examples</div>
+        <div class="row"><span class="bap">lainzs grenizsch uport</span><span class="en">light green school</span></div>
+        <div class="row"><span class="bap">blainzs reipasfal chair</span><span class="en">dark yellow chair</span></div>
+        <div class="row"><span class="bap">Ko xy taop sp lainzs blau</span><span class="en">I am smart and light blue</span></div>
+        <div class="row"><span class="bap">deth blainzs pafstal kackir</span><span class="en">the dark orange table</span></div>
+      </div>
+    </section>
+
+    <section id="rule-22" data-search="composing larger numbers">
+      <h2><span class="num">22</span>Composing Larger Numbers</h2>
+      <p>Larger numbers are composed by combining base numbers with multipliers: <code>tien</code> (10), <code>hantirden</code> (100), and <code>thaiseond</code> (1000).</p>
+      <p><strong>Rules:</strong></p>
+      <p>For tens: prefix the digit to <code>tien</code> (no spaces required, but hyphens allowed for clarity)</p>
+      <div class="ex"><div class="label">Tens</div>
+        <div class="row"><span class="bap">twitien</span><span class="en">20</span></div>
+        <div class="row"><span class="bap">threi-tien</span><span class="en">30</span></div>
+      </div>
+      <p>For compound numbers: combine with hyphens or directly</p>
+      <div class="ex"><div class="label">Compound</div>
+        <div class="row"><span class="bap">twi-tien-four</span><span class="en">24</span></div>
+        <div class="row"><span class="bap">threi-tien-noe</span><span class="en">39</span></div>
+      </div>
+      <p>For hundreds and thousands: use same pattern</p>
+      <div class="ex"><div class="label">Hundreds and thousands</div>
+        <div class="row"><span class="bap">ein-hantirden</span><span class="en">100</span></div>
+        <div class="row"><span class="bap">twi-hantirden-twitien-ein</span><span class="en">221</span></div>
+        <div class="row"><span class="bap">ein-thaiseond</span><span class="en">1000</span></div>
+      </div>
+      <p><strong>Important:</strong> <code>eintien</code> is invalid; use just <code>tien</code> for 10 (not 1-10).</p>
+      <div class="ex"><div class="label">Examples in sentences</div>
+        <div class="row"><span class="bap">Ko yu twitien Pizza</span><span class="en">I have twenty pizzas</span></div>
+        <div class="row"><span class="bap">Su xyim threi-hantirden-ein suyrn</span><span class="en">You are 301 years old</span></div>
+        <div class="row"><span class="bap">Mi nakim bi einthaiseond uport</span><span class="en">We go in one thousand schools</span></div>
+      </div>
+    </section>
+        
+        <section id="rule-23">
+            <h2><span class="num">23</span>Adjectives and Noun stacking</h2>
+            <p>Stacking Adjectives on Nouns is allowed and will result in a new compund word</p>
+            <div class="ex"><div class="label">Examples in sentences</div>
+        <div class="row"><span class="bap">"Thaintens taopkearpan xyim taop</span><span class="en">Those people are smart</span></div>
+        <div class="row"><span class="bap">Deth ptulpbalt xyim halp</span><span class="en">That beatiful girl is happy</span></div>
+        <div class="row"><span class="bap">Ko yu smallbolk</span><span class="en">I have a small book</span></div>
+      </div>
+        </section>
+
+    <p class="empty" id="empty">No rules found.</p>
+  </div>
+
+  <script>
+    const q = document.getElementById('q');
+    const empty = document.getElementById('empty');
+    const toc = document.querySelector('.toc');
+    q.addEventListener('input', () => {
+      const term = q.value.trim().toLowerCase();
+      let any = false;
+      document.querySelectorAll('section').forEach(sec => {
+        const match = !term || sec.textContent.toLowerCase().includes(term);
+        sec.style.display = match ? '' : 'none';
+        if (match) any = true;
+      });
+      toc.style.display = term ? 'none' : '';
+      empty.style.display = any ? 'none' : 'block';
+    });
+  </script>
+</body>
+</html>
